@@ -8,7 +8,7 @@
 <p>This component demonstrates showing data.</p>
 
 
-<button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded visually-hidden">Click me</button>
+<button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded hidden">Click me</button>
 
 @if (forecasts == null)
 {
@@ -16,27 +16,29 @@
 }
 else
 {
-    <table class="min-w-full text-left text-sm font-light">
-        <thead class="border-b font-medium dark:border-neutral-500">
-            <tr>
-                <th scope="col" class="px-6 py-4">Date</th>
-                <th scope="col" class="px-6 py-4">Temp. (C)</th>
-                <th scope="col" class="px-6 py-4">Temp. (F)</th>
-                <th scope="col" class="px-6 py-4">Summary</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var forecast in forecasts)
-            {
+    <div class="relative rounded-xl overflow-auto bg-gray-100">
+        <table class="border-collapse table-auto w-full text-sm px-10">
+            <thead class="">
                 <tr>
-                    <td class="whitespace-nowrap px-6 py-4 font-medium">@forecast.Date.ToShortDateString()</td>
-                    <td class="whitespace-nowrap px-6 py-4">@forecast.TemperatureC</td>
-                    <td class="whitespace-nowrap px-6 py-4">@forecast.TemperatureF</td>
-                    <td class="whitespace-nowrap px-6 py-4">@forecast.Summary</td>
+                    <th scope="col" class="px-6 py-4 text-left border-l">Date</th>
+                    <th scope="col" class="px-6 py-4 text-right">Temp. (C)</th>
+                    <th scope="col" class="px-6 py-4 text-right">Temp. (F)</th>
+                    <th scope="col" class="px-6 py-4 text-left border-r">Summary</th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody class="bg-white rounded-b-lg">
+                @foreach (var forecast in forecasts)
+                {
+                    <tr class="border-b ">
+                        <td class="whitespace-nowrap px-6 py-4 font-medium border-l">@forecast.Date.ToShortDateString()</td>
+                        <td class="whitespace-nowrap px-6 py-4 text-right">@forecast.TemperatureC</td>
+                        <td class="whitespace-nowrap px-6 py-4 text-right">@forecast.TemperatureF</td>
+                        <td class="whitespace-nowrap px-6 py-4 border-r">@forecast.Summary</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 }
 
 @code {
@@ -50,11 +52,11 @@ else
         var startDate = DateOnly.FromDateTime(DateTime.Now);
         var summaries = new[] { "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching" };
         forecasts = Enumerable.Range(1, 5).Select(index => new WeatherForecast
-        {
-            Date = startDate.AddDays(index),
-            TemperatureC = Random.Shared.Next(-20, 55),
-            Summary = summaries[Random.Shared.Next(summaries.Length)]
-        }).ToArray();
+            {
+                Date = startDate.AddDays(index),
+                TemperatureC = Random.Shared.Next(-20, 55),
+                Summary = summaries[Random.Shared.Next(summaries.Length)]
+            }).ToArray();
     }
 
     private class WeatherForecast

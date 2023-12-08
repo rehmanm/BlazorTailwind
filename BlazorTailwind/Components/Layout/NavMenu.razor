@@ -1,26 +1,22 @@
-﻿@* <div class="top-row ps-3 navbar navbar-dark">
-    <h1 class="text-2xl font-semibold">
-        <a class="navbar-brand" href="">Blazor Tailwind</a>
-    </h1>
-</div>
+﻿
 
-<input type="checkbox" title="Navigation menu" class="navbar-toggler" /> *@
+<input type="checkbox" title="Navigation menu" class="navbar-toggler" />
 
 <div class="sticky top-0 p-4 w-full" onclick="document.querySelector('.navbar-toggler').click()">
     <ul class="flex flex-col overflow-hidden">
-        <li class="nav-item px-3">
+        <li class="nav-item px-3 py-3 hover:bg-gray-300 rounded">
             <NavLink class="nav-link text-purple-800 hover:text-purple-600 truncate" href="" Match="NavLinkMatch.All">
                 <span class="fa fa-home mr-2" aria-hidden="true"></span> Home
             </NavLink>
         </li>
 
-        <li class="nav-item px-3">
+        <li class="nav-item px-3 py-3 hover:bg-gray-300 rounded">
             <NavLink class="nav-link text-purple-800 hover:text-purple-600 truncate" href="counter">
                 <span class="fa fa-home mr-2" aria-hidden="true"></span> Counter
             </NavLink>
         </li>
 
-        <li class="nav-item px-3">
+        <li class="nav-item px-3 py-3 hover:bg-gray-300 rounded">
             <NavLink class="nav-link text-purple-800 hover:text-purple-600 truncate" href="weather">
                 <span class="fa fa-home mr-2" aria-hidden="true"></span> Weather
             </NavLink>
