@@ -8,7 +8,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BlazorTailwind.Client\BlazorTailwind.Client.csproj" />
+    <PackageReference Include="Blazored.LocalStorage" Version="4.4.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.0" />
+    <PackageReference Include="TailBlazor.HeroIcons" Version="1.1.1" />
   </ItemGroup>
 
   <ItemGroup>

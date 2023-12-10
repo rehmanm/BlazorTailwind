@@ -1,3 +1,4 @@
+using Blazored.LocalStorage;
 using BlazorTailwind.Client.Pages;
 using BlazorTailwind.Components;
 
@@ -7,6 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents()
     .AddInteractiveWebAssemblyComponents();
+
+builder.Services.AddBlazoredLocalStorage();
 
 var app = builder.Build();
 

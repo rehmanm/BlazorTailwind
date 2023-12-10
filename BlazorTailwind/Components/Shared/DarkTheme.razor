@@ -1,0 +1,49 @@
+﻿@inject ILocalStorageService _localstorage;
+@rendermode InteractiveServer
+
+
+
+@if (currentTheme == "dark")
+{
+    <button type="button" @onclick="@(async () => await SetTheme("light"))">
+        <TailBlazorHeroIcon Icon="HeroIcon.Sun" Class="h-8 w-8 cursor-pointer text-yellow-500" IconStyle="IconStyle.Solid" />
+    </button>
+}
+else
+{
+    <button type="button" @onclick="@(async () => await SetTheme("dark"))">
+        <TailBlazorHeroIcon Icon="HeroIcon.Moon" Class="h-8 w-8 cursor-pointer text-gray-900" IconStyle="IconStyle.Solid" />
+    </button>
+}
+
+@code {
+    private string currentTheme = "light";
+
+    [Parameter]
+    public EventCallback<bool> OnDarkModeToggled { get; set; }
+
+    private bool _darkMode => currentTheme == "dark";
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            if (!(await _localstorage.ContainKeyAsync("theme")))
+            {
+                await _localstorage.SetItemAsync("theme", "light");
+            }
+
+            currentTheme = await _localstorage.GetItemAsStringAsync("theme");
+            await OnDarkModeToggled.InvokeAsync(_darkMode);
+        }
+    }
+
+    private async Task SetTheme(string theme)  {
+        await _localstorage.SetItemAsStringAsync("theme", theme);
+        currentTheme = theme;
+
+        Console.WriteLine($"SetTheme, {_darkMode}, {currentTheme}");
+        await OnDarkModeToggled.InvokeAsync(_darkMode);
+    }
+
+}
